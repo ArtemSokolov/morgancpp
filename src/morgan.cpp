@@ -121,6 +121,9 @@ public:
 
   // Size of the dataset
   unsigned int size() {return vbs.size() * sizeof(std::bitset<2048>);}
+
+  // Location of the dataset in memory
+  void location() {Rprintf( "Fingerprints reside at %p\n", &vbs );}
   
 private:
   std::vector< std::bitset<2048> > vbs;
@@ -137,6 +140,7 @@ RCPP_EXPOSED_CLASS(MorganFPS)
 MorganFPS makeCollection( const std::vector<std::string>& vhx )
 {
   MorganFPS res(vhx);
+  res.location();
   return res;
 }
 
@@ -150,6 +154,7 @@ RCPP_MODULE(morgan_cpp) {
   class_<MorganFPS>( "MorganFPS" )
     .constructor< std::vector<std::string> >()
     .method("size", &MorganFPS::size, "Size of the data in bytes")
+    .method("location", &MorganFPS::location, "Where the data lives")
     .method("tanimoto", &MorganFPS::tanimoto,
 	    "Similarity between two fingerprints in the collection")
     .method("tanimoto_all", &MorganFPS::tanimoto_all,
