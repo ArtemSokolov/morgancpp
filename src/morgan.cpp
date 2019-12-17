@@ -126,12 +126,27 @@ private:
   std::vector< std::bitset<2048> > vbs;
 };
 
-// Expose all relevant classes through an Rcpp module
+// Make the class visible
 RCPP_EXPOSED_CLASS(MorganFPS)
+
+//' @name makeCollection
+//' @title Top-level function that generates and returns a MorganFPS object
+//' @param vhx Vector of hexadecimal strings
+//' @return A MorganFPS object
+//' @export
+MorganFPS makeCollection( const std::vector<std::string>& vhx )
+{
+  MorganFPS res(vhx);
+  return res;
+}
+
+// Expose all relevant classes through an Rcpp module
 RCPP_MODULE(morgan_cpp) {
 
   using namespace Rcpp;
 
+  function( "makeCollection", &makeCollection );
+  
   class_<MorganFPS>( "MorganFPS" )
     .constructor< std::vector<std::string> >()
     .method("size", &MorganFPS::size, "Size of the data in bytes")

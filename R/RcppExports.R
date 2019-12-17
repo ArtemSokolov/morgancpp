@@ -13,6 +13,13 @@
 #' @export
 NULL
 
+#' @name makeCollection
+#' @title Top-level function that generates and returns a MorganFPS object
+#' @param vhx Vector of hexadecimal strings
+#' @return A MorganFPS object
+#' @export
+NULL
+
 #' Tanimoto similarity between two Morgan fingerprints
 #'
 #' Computes Tanimoto similarity between two hexadecimal strings
