@@ -137,10 +137,10 @@ RCPP_EXPOSED_CLASS(MorganFPS)
 //' @param vhx Vector of hexadecimal strings
 //' @return A MorganFPS object
 //' @export
-MorganFPS makeCollection( const std::vector<std::string>& vhx )
+MorganFPS* makeCollection( const std::vector<std::string>& vhx )
 {
-  MorganFPS res(vhx);
-  res.location();
+  MorganFPS* res = new MorganFPS(vhx);
+  res->location();
   return res;
 }
 
